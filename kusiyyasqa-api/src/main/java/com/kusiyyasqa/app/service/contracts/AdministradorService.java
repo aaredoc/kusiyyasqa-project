@@ -1,4 +1,4 @@
-package com.kusiyyasqa.app.service;
+package com.kusiyyasqa.app.service.contracts;
 
 import com.kusiyyasqa.app.models.dto.AdministradorDTO;
 

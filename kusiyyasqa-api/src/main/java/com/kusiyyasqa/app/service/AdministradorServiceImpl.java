@@ -1,25 +1,17 @@
 package com.kusiyyasqa.app.service;
 
 import com.kusiyyasqa.app.models.dto.AdministradorDTO;
-import com.kusiyyasqa.app.models.entity.Administrador;
 import com.kusiyyasqa.app.models.mapper.contracts.AdministradorMapper;
 import com.kusiyyasqa.app.repository.AdministradorRepository;
+import com.kusiyyasqa.app.service.contracts.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AdministradorServiceImpl implements AdministradorService, UserDetailsService {
+public class AdministradorServiceImpl implements AdministradorService {
 
     private final AdministradorRepository administradorRepository;
     private final AdministradorMapper administradorMapper;
@@ -63,14 +55,5 @@ public class AdministradorServiceImpl implements AdministradorService, UserDetai
         if(exists){
            this.administradorRepository.deleteById(id);
         }
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Administrador administrador = administradorRepository.findByUsername(username);
-        List<GrantedAuthority>authorities = administrador.getRoles().stream().map(auth -> new SimpleGrantedAuthority(auth.getAuthority())).collect(Collectors.toList());
-        return new User(administrador.getUsername(), administrador.getPassword(), administrador.isEnabled(), true, true, true, authorities);
     }
 }

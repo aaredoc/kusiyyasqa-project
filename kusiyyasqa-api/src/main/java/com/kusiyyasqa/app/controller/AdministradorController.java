@@ -1,14 +1,14 @@
 package com.kusiyyasqa.app.controller;
 
 import com.kusiyyasqa.app.models.dto.AdministradorDTO;
-import com.kusiyyasqa.app.service.AdministradorService;
+import com.kusiyyasqa.app.service.contracts.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/api/administrador")
+@RequestMapping("api/v1/administrador")
 public class AdministradorController {
 
     @Autowired
